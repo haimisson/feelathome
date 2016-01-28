@@ -1,0 +1,5 @@
+node_modules/
+*.iml
+.idea/
+mongo/data/
+public/bower_components/
