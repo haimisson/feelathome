@@ -1,6 +1,7 @@
 dashboard/node_modules/*
 *.iml
 .idea/
-mongo/data/
+mongo/data/*
 dashboard/mongo/mongod.log
 dashboard/public/bower_components/*
+mongo/
