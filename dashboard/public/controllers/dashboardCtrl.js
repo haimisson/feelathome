@@ -84,7 +84,7 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
                         createTempOutGauge("tempOut", "Temp Out", -20, 50);
                     }
                     if(airGauge == null) {
-                        createAirGauge("air", "Air Quality", 70, 400);
+                        createAirGauge("air", "Air Quality", 50, 400);
                     }
                     $scope.latestSensorValue = data[0];
                     tempInGauge.redraw($scope.latestSensorValue.tempIn);
