@@ -22,10 +22,11 @@ function AirGauge(placeholderName, configuration)
         this.config.minorTicks = configuration.minorTicks || 2;
 
         this.config.greenColor 	= configuration.greenColor || "#109618";
-        this.config.yellowColor = configuration.yellowColor || "#FF9900";
-        this.config.redColor 	= configuration.redColor || "#DC3912";
+        this.config.yellowColor = configuration.yellowColor || "#ffff00";
+        this.config.redColor 	= configuration.redColor || "#cc0000";
         this.config.darkBlueColor = configuration.darkBlueColor || "#0000ff";
         this.config.lightBlueColor = configuration.lightBlueColor || "#b3ccff";
+        this.config.orangeColor = configuration.orangeColor || "#ff6600";
 
         this.config.transitionDuration = configuration.transitionDuration || 500;
     }
@@ -77,6 +78,11 @@ function AirGauge(placeholderName, configuration)
         for (var index in this.config.lightBlueZones)
         {
             this.drawBand(this.config.lightBlueZones[index].from, this.config.lightBlueZones[index].to, self.config.lightBlueColor);
+        }
+
+        for (var index in this.config.orangeZones)
+        {
+            this.drawBand(this.config.orangeZones[index].from, this.config.orangeZones[index].to, self.config.orangeColor);
         }
 
         if (undefined != this.config.label)
