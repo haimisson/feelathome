@@ -1,4 +1,4 @@
-function Gauge(placeholderName, configuration)
+function TempGauge(placeholderName, configuration)
 {
     this.placeholderName = placeholderName;
 

@@ -8,7 +8,8 @@
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-messages/angular-messages.js"></script>
     <script src="bower_components/d3/d3.js"></script>
-    <script src="js/gauge.js"></script>
+    <script src="js/tempGauge.js"></script>
+    <script src="js/airGauge.js"></script>
 
     <script src="controllers/dashboardCtrl.js"></script>
 
@@ -56,11 +57,15 @@
 
         <div style="padding-bottom: 40px;">
             <div style="float: left;">
-                <span id="tempGaugeContainer"></span>
+                <span id="tempInGaugeContainer"></span>
             </div>
 
             <div style="float: left;">
-                second gauge
+                <span id="tempOutGaugeContainer"></span>
+            </div>
+
+            <div style="float: left;">
+                <span id="airGaugeContainer"></span>
             </div>
         </div>
 

@@ -19,7 +19,9 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
         getSensorValues($scope.fromDate, $scope.toDate);
     };
 
-    var tempGauge;
+    var tempInGauge;
+    var tempOutGauge;
+    var airGauge;
 
     $scope.toggleLeft = buildDelayedToggler('left');
 
@@ -75,11 +77,19 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
         $http.get('/LatestSensorValue')
             .success(function(data) {
                 if($scope.latestSensorValue.timestamp != data[0].timestamp) {
-                    if(tempGauge == null) {
-                        createGauge("temp", "Temperature", 0, 40);
+                    if(tempInGauge == null) {
+                        createTempInGauge("tempIn", "Temp In", 0, 40);
+                    }
+                    if(tempOutGauge == null) {
+                        createTempOutGauge("tempOut", "Temp Out", 0, 40);
+                    }
+                    if(airGauge == null) {
+                        createAirGauge("air", "Air Quality", 0, 900);
                     }
                     $scope.latestSensorValue = data[0];
-                    tempGauge.redraw($scope.latestSensorValue.tempIn);
+                    tempInGauge.redraw($scope.latestSensorValue.tempIn);
+                    tempOutGauge.redraw($scope.latestSensorValue.tempOut);
+                    airGauge.redraw($scope.latestSensorValue.airQ);
                 }
             })
             .error(function(data) {
@@ -87,7 +97,7 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
             });
     }
 
-    function createGauge(name, label, min, max)
+    function createTempInGauge(name, label, min, max)
     {
         var config =
         {
@@ -104,8 +114,50 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
         config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
         config.redZones = [{ from: config.min + range*0.9, to: config.max }];
 
-        tempGauge = new Gauge(name + "GaugeContainer", config);
-        tempGauge.render();
+        tempInGauge = new TempGauge(name + "GaugeContainer", config);
+        tempInGauge.render();
+    }
+
+    function createTempOutGauge(name, label, min, max)
+    {
+        var config =
+        {
+            size: 200,
+            label: label,
+            min: undefined != min ? min : 0,
+            max: undefined != max ? max : 100,
+            minorTicks: 5
+        }
+
+        var range = config.max - config.min;
+        config.darkBlueZones = [{ from: config.min, to: config.min + range*0.1 }];
+        config.lightBlueZones = [{ from: config.min + range*0.1, to: config.min + range*0.25 }];
+        config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+        config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+
+        tempOutGauge = new TempGauge(name + "GaugeContainer", config);
+        tempOutGauge.render();
+    }
+
+    function createAirGauge(name, label, min, max)
+    {
+        var config =
+        {
+            size: 200,
+            label: label,
+            min: undefined != min ? min : 0,
+            max: undefined != max ? max : 100,
+            minorTicks: 5
+        }
+
+        var range = config.max - config.min;
+        config.darkBlueZones = [{ from: config.min, to: config.min + range*0.1 }];
+        config.lightBlueZones = [{ from: config.min + range*0.1, to: config.min + range*0.25 }];
+        config.yellowZones = [{ from: config.min + range*0.75, to: config.min + range*0.9 }];
+        config.redZones = [{ from: config.min + range*0.9, to: config.max }];
+
+        airGauge = new AirGauge(name + "GaugeContainer", config);
+        airGauge.render();
     }
 
     function drawgraph() {

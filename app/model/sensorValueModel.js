@@ -8,7 +8,8 @@ var SensorValueSchema = new Schema({
         timestamp: {type: SchemaTypes.Date},
         tempIn: {type: SchemaTypes.String},
         tempOut: {type: SchemaTypes.String},
-        airQ: {type: SchemaTypes.String}
+        airQ: {type: SchemaTypes.String},
+        icon: {type: SchemaTypes.String}
     },
     // mongoose adds an s at the end of the collection name
     // to force it using another collection specify here
