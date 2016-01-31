@@ -1,6 +1,6 @@
-node_modules/
+dashboard/node_modules/*
 *.iml
 .idea/
 mongo/data/
-mongo/mongod.log
-public/bower_components/
+dashboard/mongo/mongod.log
+dashboard/public/bower_components/*
