@@ -1,0 +1,38 @@
+
+#graph path {
+    stroke: steelblue;
+    stroke-width: 1;
+    fill: none;
+}
+
+.x.axis line {
+    shape-rendering: crispEdges;
+    stroke: lightgrey;
+}
+
+.x.axis path {
+    display: none;
+}
+
+.y.axis line {
+    shape-rendering: crispEdges;
+    stroke: #000;
+}
+
+.y.axis .minor line {
+    stroke: lightgrey;
+}
+
+.y.axis path {
+    display: none;
+}
+
+.overlay {
+    fill: none;
+    pointer-events: all;
+}
+
+.focus circle {
+    fill: none;
+    stroke: steelblue;
+}

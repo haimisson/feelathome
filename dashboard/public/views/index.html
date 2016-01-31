@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" ng-app="FeelAtHome">
+<head>
+    <meta charset="UTF-8">
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/d3/d3.js"></script>
+    <script src="js/tempGauge.js"></script>
+    <script src="js/airGauge.js"></script>
+
+    <script src="controllers/dashboardCtrl.js"></script>
+
+    <link href="bower_components/angular-material/angular-material.css" rel="stylesheet" >
+    <link href="css/index.css" rel="stylesheet" >
+
+    <title>FeelAtHome | Dashboard</title>
+</head>
+<body>
+
+    <div ng-controller="dashboardCtrl as ctrl" layout="column" layout-align="none center" ng-cloak style="height: 100%">
+
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+
+            <md-toolbar>
+                <div class="md-toolbar-tools" ng-controller="sidenavCtrl">
+                    <md-button ng-click="close()" class="md-icon-button" aria-label="Menu">
+                        <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                    </md-button>
+                    <h2>
+                        <span>Feel at Home</span>
+                    </h2>
+                    <span flex></span>
+                </div>
+            </md-toolbar>
+            <md-content layout-padding="" hide-md="" show-gt-md="">
+                <p>
+                    sidenav
+                </p>
+            </md-content>
+
+        </md-sidenav>
+
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="Menu">
+                    <md-icon md-svg-icon="img/icons/menu.svg"></md-icon>
+                </md-button>
+                <h2>
+                    <span>Feel at Home</span>
+                </h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <div style="padding-bottom: 40px;">
+            <div style="float: left;">
+                <span id="tempInGaugeContainer"></span>
+            </div>
+
+            <div style="float: left;">
+                <span id="tempOutGaugeContainer"></span>
+            </div>
+
+            <div style="float: left;">
+                <span id="airGaugeContainer"></span>
+            </div>
+        </div>
+
+        <div>
+            From Date: <md-datepicker ng-model="fromDate" ng-change="changeFromDate(fromDate)" md-min-date="minDate" md-max-date="maxDate" md-placeholder="Enter date"></md-datepicker>
+            To Date: <md-datepicker ng-model="toDate" ng-change="changeToDate(toDate)" md-min-date="fromDate" md-max-date="maxDate" md-placeholder="Enter date"></md-datepicker>
+            <!--From Date: <md-datepicker ng-model="fromDate" ng-change="changeFromDate(fromDate)" required md-max-date="maxDate" md-placeholder="Enter date"></md-datepicker>-->
+            <!--To Date: <md-datepicker ng-model="toDate" ng-change="changeToDate(toDate)" md-min-date="fromDate" md-max-date="maxDate" md-placeholder="Enter date"></md-datepicker>-->
+        </div>
+
+        <div>
+            <span id="graph"></span>
+        </div>
+
+    </div>
+</body>
+</html>
