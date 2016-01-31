@@ -1371,6 +1371,38 @@ int out;
 int gas;
 String outPic;
 
+void displayNormalScreen(){
+	uView.clear(PAGE);
+	uView.setCursor(0,0);
+	displayTemperature(outPic);
+	uView.print("out:" + String(out) + "C\nin:" + String(in) + "C");
+	uView.display();
+	
+	delay(2000);
+	uView.clear(PAGE);
+
+	uView.setCursor(0,0);
+	if(gas < 150)
+		displayUp();
+	else
+		displayDown();
+	uView.print("gas:" + String(gas) );	
+	uView.display();
+	delay(2000);
+}
+
+void displayAlarmScreen(){
+	uView.clear(PAGE);
+
+	uView.setCursor(0,0);
+	displayDown();
+	uView.print("gas:" + String(gas) );	
+	uView.display();
+	delay(1500);
+	uView.clear(PAGE);
+	uView.display();
+	delay(100);
+}
 void loop() {
 	String s;
 	s = Serial.readString();
@@ -1392,22 +1424,9 @@ void loop() {
 	}
 	
 	if(in != -100){
-		uView.clear(PAGE);
-		uView.setCursor(0,0);
-		displayTemperature(outPic);
-		uView.print("out:" + String(out) + "C\nin:" + String(in) + "C");
-		uView.display();
-		
-		delay(2000);
-		uView.clear(PAGE);
-	
-		uView.setCursor(0,0);
-		if(gas < 150)
-			displayUp();
+		if(gas < 250)
+			displayNormalScreen();
 		else
-			displayDown();
-		uView.print("gas:" + String(gas) );	
-		uView.display();
-		delay(2000);	
+			displayAlarmScreen();
 	}
 }
