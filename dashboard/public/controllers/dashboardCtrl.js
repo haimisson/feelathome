@@ -260,10 +260,7 @@ angular.module('FeelAtHome', ['ngMaterial','ngMaterial','ngMessages']).controlle
 
             var difference = Math.floor((x_range[1] - x_range[0]) / (1000*60*60));
 
-            if(difference == 0) {
-                xAxis.ticks(d3.time.seconds, 1).tickFormat(d3.time.format('%X'));
-            }
-            else if(difference <= 5) {
+            if(difference <= 5) {
                 xAxis.ticks(d3.time.minutes, 30).tickFormat(d3.time.format('%X'));
             }
             else if(difference <= 10) {

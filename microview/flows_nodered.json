@@ -1,0 +1,107 @@
+[
+  {
+    "type": "tab",
+    "id": "2a953cf0.3e48b4",
+    "label": "Sheet 1"
+  },
+  {
+    "id": "6dc12966.9cc578",
+    "type": "mongodb",
+    "z": "2a953cf0.3e48b4",
+    "hostname": "127.0.0.1",
+    "port": "27017",
+    "db": "feelathome",
+    "name": ""
+  },
+  {
+    "id": "469d9d75.5b244c",
+    "type": "serial-port",
+    "z": "2a953cf0.3e48b4",
+    "serialport": "/dev/ttyUSB0",
+    "serialbaud": "9600",
+    "databits": "8",
+    "parity": "none",
+    "stopbits": "1",
+    "newline": "\\n",
+    "bin": "false",
+    "out": "char",
+    "addchar": false
+  },
+  {
+    "id": "43307a45.a5db54",
+    "type": "serial out",
+    "z": "2a953cf0.3e48b4",
+    "name": "",
+    "serial": "469d9d75.5b244c",
+    "x": 669,
+    "y": 219,
+    "wires": []
+  },
+  {
+    "id": "8566e6f9.e983c",
+    "type": "mongodb in",
+    "z": "2a953cf0.3e48b4",
+    "mongodb": "6dc12966.9cc578",
+    "name": "",
+    "collection": "sensorvalues",
+    "operation": "find",
+    "x": 505,
+    "y": 84,
+    "wires": [
+      [
+        "e282607.2fd882"
+      ]
+    ]
+  },
+  {
+    "id": "68ec0782.444938",
+    "type": "function",
+    "z": "2a953cf0.3e48b4",
+    "name": "",
+    "func": "msg.limit = 1;\nmsg.sort = {$natural: -1};\nreturn msg;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 242,
+    "y": 87,
+    "wires": [
+      [
+        "8566e6f9.e983c"
+      ]
+    ]
+  },
+  {
+    "id": "438adab8.a1f8dc",
+    "type": "inject",
+    "z": "2a953cf0.3e48b4",
+    "name": "",
+    "topic": "",
+    "payload": "",
+    "payloadType": "none",
+    "repeat": "5",
+    "crontab": "",
+    "once": true,
+    "x": 89,
+    "y": 83,
+    "wires": [
+      [
+        "68ec0782.444938"
+      ]
+    ]
+  },
+  {
+    "id": "e282607.2fd882",
+    "type": "function",
+    "z": "2a953cf0.3e48b4",
+    "name": "",
+    "func": "var serialdata = {};\nconsole.log(msg.payload);\nserialdata.payload = msg.payload[0].tempIn + \";\" + msg.payload[0].tempOut + \";\" + msg.payload[0].airQ + \";\" + msg.payload[0].icon;\nreturn serialdata;",
+    "outputs": 1,
+    "noerr": 0,
+    "x": 775,
+    "y": 77,
+    "wires": [
+      [
+        "43307a45.a5db54"
+      ]
+    ]
+  }
+]
